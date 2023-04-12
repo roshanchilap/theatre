@@ -4,12 +4,11 @@ const cors = require("cors");
 const movieRoutes = require("./routes/Movie");
 const showtimeRoutes = require("./routes/showTime");
 const theatresRoutes = require("./routes/theatre");
+require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const mongoUrl =
-  "mongodb+srv://admin1:admin123@cluster1.egxxii4.mongodb.net/?retryWrites=true&w=majority";
-
+const mongoURL = process.env.mongoURL;
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -17,7 +16,7 @@ let db;
 
 const mongoose = require("mongoose");
 mongoose
-  .connect(mongoUrl, { useNewUrlParser: true })
+  .connect(mongoURL, { useNewUrlParser: true })
   .then(() => {
     console.log("Successfully connected to MongoDB");
   })
